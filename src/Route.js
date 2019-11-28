@@ -2,14 +2,18 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {View, Image, Button, Dimensions, SafeAreaView} from 'react-native';
-import MainPage from './MainPage/MainPage'
+import Collections from './MainPage/Collections'
 import SettingPage from './Setting/SettingPage'
 import AuthenticatePage from './Authentication/AuthenticatePage';
 import {Icon} from 'native-base'
+import Category from './MainPage/Category';
+import Cart from './MainPage/Cart';
+import History from './MainPage/History';
 
 const CustomDrawerNavigation = (props) => (
-    <SafeAreaView style={{padding : 15}}>
+    <SafeAreaView style={{padding : 7}}>
         <View style={{height: 150, justifyContent: 'center', alignItems: 'center'}}>
             <Image style={{height : Dimensions.get('screen').width * 0.5, width: Dimensions.get('screen').width * 0.5}} source={{uri: 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651_960_720.png'}}/>
         </View>
@@ -44,9 +48,54 @@ const SettingPageStackNavigation = createStackNavigator(
     }
 )
 
+const MainPageBottomTabsNavigation = createBottomTabNavigator(
+    {
+        Collections : {
+            screen: Collections,
+            navigationOptions : {
+                tabBarIcon: (
+                    <Icon name='collections' type="MaterialIcons"/>
+                )
+            },
+        },
+        Category : {
+            screen: Category,
+            navigationOptions : {
+                tabBarIcon: (
+                    <Icon name='panorama' type="MaterialIcons"/>
+                )
+            },
+        },
+        Cart : {
+            screen: Cart,
+            navigationOptions : {
+                tabBarIcon: (
+                    <Icon name='shoppingcart' type="AntDesign"/>
+                )
+            }
+        },
+        History : {
+            screen: History,
+            navigationOptions : {
+                tabBarIcon: (
+                    <Icon name='history' type="MaterialIcons"/>
+                )
+            }
+        }
+    },
+    {
+        defaultNavigationOptions : {
+            tabBarOptions: {
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'gray',
+            },
+        }
+    }
+)
+
 const MainPageStackNavigation = createStackNavigator(
     {
-        Main : MainPage,
+        Main : MainPageBottomTabsNavigation,
     },
     {
         defaultNavigationOptions : ({navigation}) => ({
@@ -71,6 +120,9 @@ const DrawerNavigation = createDrawerNavigator(
             screen : MainPageStackNavigation,
             navigationOptions : {
                 title : 'Main page',
+                drawerIcon : (
+                    <Icon name="home" style={{padding: 0}}/>
+                )
             }
             
         },
@@ -78,12 +130,18 @@ const DrawerNavigation = createDrawerNavigator(
             screen : SettingPageStackNavigation,
             navigationOptions : {
                 title : 'Setting page',
+                drawerIcon : (
+                    <Icon name="settings" style={{padding: 0}}/>
+                )
             }
         },
         Authen : {
             screen : AuthenticatePage,
             navigationOptions : {
-                title : 'Login'
+                title : 'Login',
+                drawerIcon : (
+                    <Icon name="login" type="MaterialCommunityIcons"/>
+                )
             }
         }
     },

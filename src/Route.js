@@ -103,6 +103,9 @@ const MainPageStackNavigation = createStackNavigator(
             headerLeft : (
                 <Icon name='menu' style={{paddingLeft: 10, color: 'white'}} onPress={() => navigation.openDrawer()}/>
             ),
+            headerRight : (
+                <Icon name="shopping-bag" type="FontAwesome" style={{paddingRight: 10, color: 'white'}}/>
+            ),
             headerStyle: {
                 backgroundColor : '#007bff',
             },

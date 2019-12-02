@@ -50,7 +50,6 @@ export default class Card extends Component {
             ]}
           >
             <Animated.View
-  
               style={[
                 styles.bar,
                 {
@@ -67,7 +66,7 @@ export default class Card extends Component {
       })
         return (
             <View style={styles.container}>
-                <Text style={{fontSize: 25, color: 'grey',alignSelf: 'flex-start', margin : 10}}>CLOTHES</Text>
+                <Text style={{fontSize: 25, color: 'grey',alignSelf: 'flex-start', margin : 10}}>{this.props.title}</Text>
                 <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}

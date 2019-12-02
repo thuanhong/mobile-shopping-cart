@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-export default class Category extends Component {
+export default class Contact extends Component {
     render() {
         return (
             <View style={styles.container}>

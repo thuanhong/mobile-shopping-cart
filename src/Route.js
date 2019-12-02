@@ -4,11 +4,11 @@ import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {View, Image, Button, Dimensions, SafeAreaView} from 'react-native';
-import Collections from './MainPage/Collections'
+import Home from './MainPage/Home'
 import SettingPage from './Setting/SettingPage'
 import AuthenticatePage from './Authentication/AuthenticatePage';
 import {Icon} from 'native-base'
-import Category from './MainPage/Category';
+import Contact from './MainPage/Contact';
 import Cart from './MainPage/Cart';
 import History from './MainPage/History';
 
@@ -50,19 +50,11 @@ const SettingPageStackNavigation = createStackNavigator(
 
 const MainPageBottomTabsNavigation = createBottomTabNavigator(
     {
-        Collections : {
-            screen: Collections,
+        Home : {
+            screen: Home,
             navigationOptions : {
                 tabBarIcon: (
-                    <Icon name='collections' type="MaterialIcons"/>
-                )
-            },
-        },
-        Category : {
-            screen: Category,
-            navigationOptions : {
-                tabBarIcon: (
-                    <Icon name='panorama' type="MaterialIcons"/>
+                    <Icon name='home' type="Entypo"/>
                 )
             },
         },
@@ -81,7 +73,15 @@ const MainPageBottomTabsNavigation = createBottomTabNavigator(
                     <Icon name='history' type="MaterialIcons"/>
                 )
             }
-        }
+        },
+        Contact : {
+            screen: Contact,
+            navigationOptions : {
+                tabBarIcon: (
+                    <Icon name='user' type="EvilIcons"/>
+                )
+            },
+        },
     },
     {
         defaultNavigationOptions : {
@@ -127,7 +127,7 @@ const DrawerNavigation = createDrawerNavigator(
                     <Icon name="home" style={{padding: 0}}/>
                 )
             }
-            
+
         },
         Setting: {
             screen : SettingPageStackNavigation,

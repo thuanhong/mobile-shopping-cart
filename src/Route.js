@@ -21,7 +21,7 @@ const CustomDrawerNavigation = (props) => (
             <DrawerItems {...props}/>
             <Button
                 title={'Log out'}
-                onPress={() => {console.log('LOG OUT')}}
+                onPress={() => {props.navigation.navigate('Authen')}}
             />
         </View>
     </SafeAreaView>
@@ -138,15 +138,6 @@ const DrawerNavigation = createDrawerNavigator(
                 )
             }
         },
-        Authen : {
-            screen : AuthenticatePage,
-            navigationOptions : {
-                title : 'Login',
-                drawerIcon : (
-                    <Icon name="login" type="MaterialCommunityIcons"/>
-                )
-            }
-        }
     },
     {
         hideStatusBar: true,
@@ -156,4 +147,24 @@ const DrawerNavigation = createDrawerNavigator(
     }
 );
 
-export default createAppContainer(DrawerNavigation);
+const stackLoginNavigation = createStackNavigator(
+    {
+        Drawer : {
+            screen : DrawerNavigation,
+            navigationOptions : {
+                headerShown : false
+            }
+        },
+        Authen : {
+            screen : AuthenticatePage,
+            navigationOptions : {
+                title : 'Login',
+                drawerIcon : (
+                    <Icon name="login" type="MaterialCommunityIcons"/>
+                )
+            }
+        }
+    }
+)
+
+export default createAppContainer(stackLoginNavigation);

@@ -22,7 +22,6 @@ export default class Card extends Component {
       let imageArray = []
       let barArray = []
       images.forEach((image, i) => {
-        console.log(image, i)
         const thisImage = (
           <Image
             key={`image${i}`}

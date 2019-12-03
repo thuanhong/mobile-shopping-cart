@@ -159,12 +159,17 @@ const stackLoginNavigation = createStackNavigator(
             screen : AuthenticatePage,
             navigationOptions : {
                 title : 'Login',
-                drawerIcon : (
-                    <Icon name="login" type="MaterialCommunityIcons"/>
-                )
+                headerStyle : {
+                    backgroundColor:'#4ddadc',
+                    elevation : 0
+                },
+                headerTitleStyle : {
+                    color : "white"
+                },
+                headerTintColor : 'white'
             }
         }
-    }
+    },
 )
 
 export default createAppContainer(stackLoginNavigation);

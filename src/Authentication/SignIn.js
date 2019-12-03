@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -14,8 +15,27 @@ export default class SignIn extends Component {
         }
     }
 
-    login() {
-        console.log('navigate')
+    async login() {
+        if (!this.state.username || !this.state.password) {
+            Alert.alert('Please Input')
+            return
+        }
+        try {
+            const value = await AsyncStorage.getItem(this.state.username)
+            if(value !== null) {
+                if (value === this.state.password) {
+                    await AsyncStorage.setItem('login', 'true')
+                    this.props.goBack()
+                } else {
+                    Alert.alert('Wrong password')
+                }
+            } else {
+                Alert.alert('User not exist')
+            }
+        } catch(e) {
+            console.log(e)
+        }
+        // console.log(await AsyncStorage.getAllKeys())
     }
 
     changeStatePassword() {
@@ -35,27 +55,25 @@ export default class SignIn extends Component {
     render() {
         return (
             <LinearGradient style={styles.container} colors={['#4ddadc', '#225a8e']}>
-                <KeyboardAvoidingView style={styles.container} behavior="height">
-                    <TextInput 
-                        onChangeText={(username) => {this.setState({username})}}
-                        style={styles.input}
-                        placeholder={'User name'}
-                        placeholderTextColor={'white'}
-                    />
-                    <Icon name="user" type="AntDesign" style={[styles.symbol, {marginTop : '40%', left : '5%'}]}/>
-                    <TextInput 
-                        onChangeText={(password) => {this.setState({password})}}
-                        style={styles.input}
-                        placeholder={'Password'}
-                        placeholderTextColor={'white'}
-                        secureTextEntry={this.state.visiable}
-                    />
-                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%'}]}/>
-                    <Icon name={this.state.iconPassword} type="Entypo" style={[{right : '5%'}, styles.symbol]} onPress={this.changeStatePassword.bind(this)}/>
-                    <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
-                        <Text style={styles.txt}>Sign in</Text>
-                    </TouchableOpacity>
-                </KeyboardAvoidingView>
+                <TextInput 
+                    onChangeText={(username) => {this.setState({username})}}
+                    style={styles.input}
+                    placeholder={'User name'}
+                    placeholderTextColor={'white'}
+                />
+                <Icon name="user" type="AntDesign" style={[styles.symbol, {marginTop : '40%', left : '5%'}]}/>
+                <TextInput 
+                    onChangeText={(password) => {this.setState({password})}}
+                    style={styles.input}
+                    placeholder={'Password'}
+                    placeholderTextColor={'white'}
+                    secureTextEntry={this.state.visiable}
+                />
+                <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%'}]}/>
+                <Icon name={this.state.iconPassword} type="Entypo" style={[{right : '5%'}, styles.symbol]} onPress={this.changeStatePassword.bind(this)}/>
+                <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
+                    <Text style={styles.txt}>Sign in</Text>
+                </TouchableOpacity>
             </LinearGradient>  
         );
     }

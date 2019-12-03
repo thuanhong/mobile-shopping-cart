@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ScrollView, TextInput, TouchableOpacity, Dimensions } from 'react-native'
+import { Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Dimensions, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -18,8 +19,14 @@ export default class SignIn extends Component {
         }
     }
 
-    login() {
-        console.log('navigate')
+    async createNewAccount() {
+        if (this.state.password === this.state.confirmPassword) {
+            await AsyncStorage.setItem(this.state.username, this.state.password);
+            Alert.alert('Register successfully')
+            this.props.changeTab()
+        } else {
+            Alert.alert('Password and password confirm not match')
+        }
     }
 
     changeStatePassword() {
@@ -53,8 +60,7 @@ export default class SignIn extends Component {
     render() {
         return (
             <ScrollView style={styles.container}>
-            <LinearGradient style={{height : Dimensions.get('screen').height * 0.8}} colors={['#4ddadc', '#225a8e']}>
-                
+                <LinearGradient style={{height : Dimensions.get('screen').height * 0.8}} colors={['#4ddadc', '#225a8e']}>
                     <TextInput 
                         onChangeText={(username) => {this.setState({username})}}
                         style={styles.input}
@@ -64,7 +70,7 @@ export default class SignIn extends Component {
                     <Icon name="user" type="AntDesign" style={[styles.symbol, {left : '5%', top : "2.5%"}]}/>
                     
                     <TextInput 
-                        onChangeText={(username) => {this.setState({username})}}
+                        onChangeText={(email) => {this.setState({email})}}
                         style={styles.input}
                         placeholder={'Email'}
                         placeholderTextColor={'white'}
@@ -91,10 +97,10 @@ export default class SignIn extends Component {
                     <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '38.5%'}]}/>
                     <Icon name={this.state.iconConfirmPassword} type="Entypo" style={[{right : '5%', top : '38.5%'}, styles.symbol]} onPress={this.changeStateConfirmPassword.bind(this)}/>
                     
-                    <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
+                    <TouchableOpacity style={styles.btn} onPress={this.createNewAccount.bind(this)}>
                         <Text style={styles.txt}>Sign Up</Text>
                     </TouchableOpacity>
-            </LinearGradient>  
+                </LinearGradient>
             </ScrollView>
         );
     }

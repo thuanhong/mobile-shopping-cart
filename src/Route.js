@@ -11,6 +11,9 @@ import {Icon} from 'native-base'
 import Contact from './MainPage/Contact';
 import Cart from './MainPage/Cart';
 import History from './MainPage/History';
+import ListProducts from './utils/ListProducts';
+import ProductDetail from './utils/ProductDetail';
+
 
 const CustomDrawerNavigation = (props) => (
     <SafeAreaView style={{padding : 7}}>
@@ -48,10 +51,24 @@ const SettingPageStackNavigation = createStackNavigator(
     }
 )
 
+const homePageStackNavigation = createStackNavigator(
+    {
+        Home : Home,
+        List : ListProducts,
+        Detail : ProductDetail
+    },
+    {
+        defaultNavigationOptions : {
+            headerShown : false
+        },
+        initialRouteName : 'List'
+    }
+)
+
 const MainPageBottomTabsNavigation = createBottomTabNavigator(
     {
         Home : {
-            screen: Home,
+            screen: homePageStackNavigation,
             navigationOptions : {
                 tabBarIcon: (
                     <Icon name='home' type="Entypo"/>

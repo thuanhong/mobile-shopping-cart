@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Animated, View, StyleSheet, Image, Dimensions, ScrollView, Text } from 'react-native'
+import { Animated, View, StyleSheet, Image, Dimensions, ScrollView, Text, TouchableOpacity } from 'react-native'
 
 
 const deviceWidth = Dimensions.get('window').width * 0.9
@@ -23,11 +23,14 @@ export default class Card extends Component {
       let barArray = []
       images.forEach((image, i) => {
         const thisImage = (
-          <Image
-            key={`image${i}`}
-            source={{uri: image}}
-            style={{ width: deviceWidth, height : 200 }}
-          />
+          <TouchableOpacity key={`image${i}`} onPress={() => this.props.navigatePage('List', {
+            title: this.props.title
+          })}>
+            <Image
+              source={{uri: image}}
+              style={{ width: deviceWidth, height : 200 }}
+            />
+          </TouchableOpacity>
         )
         imageArray.push(thisImage)
   

@@ -1,38 +1,36 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native';
 import Card from '../utils/Card'
 
 
 class Grid extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            arrayColor : ['black', 'red', 'yellow', 'blue', 'grey', 'violet']
+        }
+    }
+
     render() {
         return(
             <View style={styles.top_product}>
                 <Text style={{fontSize: 25, color: 'grey',alignSelf: 'flex-start', margin : 10}}>TOP PRODUCT</Text>
                 <View style={styles.gridview}>
-                    <View style={styles.grid}>
-                        <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                        <Text style={styles.cost}>Cost : 12.09 $</Text>
-                    </View>
-                    <View style={styles.grid}>
-                        <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                        <Text style={styles.cost}>Cost : 43.09 $</Text>
-                    </View>
-                    <View style={styles.grid}>
-                        <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                        <Text style={styles.cost}>Cost : 123.82 $</Text>
-                    </View>
-                    <View style={styles.grid}>
-                        <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                        <Text style={styles.cost}>Cost : 3.09 $</Text>
-                    </View>
-                    <View style={styles.grid}>
-                        <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                        <Text style={styles.cost}>Cost : 13.22 $</Text>
-                    </View>
-                    <View style={styles.grid}>
-                        <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                        <Text style={styles.cost}>Cost : 53.09 $</Text>
-                    </View>
+                    {
+                        this.state.arrayColor.map((color, index) => {
+                            const costRandom = (Math.random() * 100).toFixed(2)
+                            return (
+                                <TouchableOpacity key={color} style={styles.grid} onPress={() => this.props.navigate('Detail', {
+                                    cost : costRandom,
+                                    color : color
+                                })}>
+                                    <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
+                                    <Text style={styles.cost}>Cost : {costRandom}$</Text>
+                                    <Text>Color : {color}</Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
                 </View>
             </View>
         );
@@ -47,10 +45,10 @@ export default class Home extends React.Component {
     render() {
         return(
             <ScrollView style={styles.container}>
-                <Card title={"CLOTHES"}/>
-                <Card title={"ELECTRIC DEVICES"}/>
+                <Card navigatePage={this.props.navigation.navigate.bind(this)} title={"CLOTHES"}/>
+                <Card navigatePage={this.props.navigation.navigate.bind(this)} title={"ELECTRIC DEVICES"}/>
                 <View>
-                    <Grid/>
+                    <Grid navigate={this.props.navigation.navigate.bind(this)}/>
                 </View>
             </ScrollView>
         );

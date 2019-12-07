@@ -59,8 +59,8 @@ export default class SignIn extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <LinearGradient style={{height : Dimensions.get('screen').height * 0.8}} colors={['#4ddadc', '#225a8e']}>
+            <ScrollView>
+                <LinearGradient style={{height : Dimensions.get('screen').height * 0.85}} colors={['#4ddadc', '#225a8e']}>
                     <TextInput 
                         onChangeText={(username) => {this.setState({username})}}
                         style={styles.input}
@@ -75,7 +75,7 @@ export default class SignIn extends Component {
                         placeholder={'Email'}
                         placeholderTextColor={'white'}
                     />
-                    <Icon name="email" type="MaterialCommunityIcons" style={[styles.symbol, {left : '5%', top : "15.5%"}]}/>
+                    <Icon name="email" type="MaterialCommunityIcons" style={[styles.symbol, {left : '5%', top : "16.5%"}]}/>
                     
                     <TextInput 
                         onChangeText={(password) => {this.setState({password})}}
@@ -84,8 +84,8 @@ export default class SignIn extends Component {
                         placeholderTextColor={'white'}
                         secureTextEntry={this.state.visiable}
                     />
-                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '26.5%'}]}/>
-                    <Icon name={this.state.iconPassword} type="Entypo" style={[{right : '5%', top : '26.5%'}, styles.symbol]} onPress={this.changeStatePassword.bind(this)}/>
+                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '28.5%'}]}/>
+                    <Icon name={this.state.iconPassword} type="Entypo" style={[{right : '5%', top : '28.5%'}, styles.symbol]} onPress={this.changeStatePassword.bind(this)}/>
                     
                     <TextInput 
                         onChangeText={(confirmPassword) => {this.setState({confirmPassword})}}
@@ -94,8 +94,8 @@ export default class SignIn extends Component {
                         placeholderTextColor={'white'}
                         secureTextEntry={this.state.visiableConfirmPassword}
                     />
-                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '38.5%'}]}/>
-                    <Icon name={this.state.iconConfirmPassword} type="Entypo" style={[{right : '5%', top : '38.5%'}, styles.symbol]} onPress={this.changeStateConfirmPassword.bind(this)}/>
+                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '40.5%'}]}/>
+                    <Icon name={this.state.iconConfirmPassword} type="Entypo" style={[{right : '5%', top : '40.5%'}, styles.symbol]} onPress={this.changeStateConfirmPassword.bind(this)}/>
                     
                     <TouchableOpacity style={styles.btn} onPress={this.createNewAccount.bind(this)}>
                         <Text style={styles.txt}>Sign Up</Text>
@@ -107,9 +107,6 @@ export default class SignIn extends Component {
 }
 
 const styles = StyleSheet.create({
-    container : {
-        height : Dimensions.get('screen').height
-    },
     input : {
         paddingLeft : '10%',
         margin : 10,

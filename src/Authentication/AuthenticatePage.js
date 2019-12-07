@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Tab, Tabs, Container} from 'native-base';
-import {StyleSheet} from 'react-native';
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 

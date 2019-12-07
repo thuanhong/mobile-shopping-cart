@@ -53,15 +53,26 @@ const SettingPageStackNavigation = createStackNavigator(
 
 const homePageStackNavigation = createStackNavigator(
     {
-        Home : Home,
+        Home : {
+            screen : Home,
+            navigationOptions : {
+                headerShown : false
+            }
+        },
         List : ListProducts,
-        Detail : ProductDetail
+        Detail : {
+            screen : ProductDetail,
+            navigationOptions : {
+                headerShown : true,
+                title : 'Detail'
+            }
+        }
     },
     {
+        initialRouteName : 'Home',
         defaultNavigationOptions : {
             headerShown : false
-        },
-        initialRouteName : 'List'
+        }
     }
 )
 

@@ -5,7 +5,8 @@ export default class Contact extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Category</Text>
+                <Text>Email : thuanhong@gmail.com</Text>
+                <Text>Name : Hong Thanh Thuan</Text>
             </View>
         )
     }

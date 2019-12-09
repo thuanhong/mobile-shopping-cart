@@ -5,7 +5,7 @@ export default class Cart extends Component {
     render() {
         return (
             <View>
-                <Text> Cart </Text>
+                <Text> </Text>
             </View>
         )
     }

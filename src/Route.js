@@ -1,5 +1,5 @@
 import React from 'react';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -175,29 +175,17 @@ const DrawerNavigation = createDrawerNavigator(
     }
 );
 
-const stackLoginNavigation = createStackNavigator(
+const mainSwitchNavigation = createSwitchNavigator(
     {
-        Drawer : {
-            screen : DrawerNavigation,
-            navigationOptions : {
-                headerShown : false
-            }
-        },
-        Authen : {
-            screen : AuthenticatePage,
-            navigationOptions : {
-                title : 'Login',
-                headerStyle : {
-                    backgroundColor:'#4ddadc',
-                    elevation : 0
-                },
-                headerTitleStyle : {
-                    color : "white"
-                },
-                headerTintColor : 'white'
-            }
-        }
+        Drawer : DrawerNavigation,
+        Authen :  AuthenticatePage
     },
+    {
+        initialRouteName : 'Authen',
+        defaultNavigationOptions : {
+            headerShown : false
+        }
+    }
 )
 
-export default createAppContainer(stackLoginNavigation);
+export default createAppContainer(mainSwitchNavigation);

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
-import AsyncStorage from '@react-native-community/async-storage';
+import * as Config from '../utils/Config'
+// import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -15,26 +16,46 @@ export default class SignIn extends Component {
         }
     }
 
-    async login() {
+    login() {
         if (!this.state.username || !this.state.password) {
             Alert.alert('Please Input')
             return
         }
-        try {
-            const value = await AsyncStorage.getItem(this.state.username)
-            if(value !== null) {
-                if (value === this.state.password) {
-                    await AsyncStorage.setItem('login', 'true')
-                    this.props.goBack()
-                } else {
-                    Alert.alert('Wrong password')
-                }
-            } else {
-                Alert.alert('User not exist')
+
+        fetch(`${Config.END_POINT}/api-server-store/authenticate`, {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username : this.state.username,
+                password : this.state.password
+            })
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+            if (responseJson.status_code == 200) {
+                Alert.alert('Login successful')
+                this.props.navigate('Drawer')
             }
-        } catch(e) {
-            console.log(e)
-        }
+        })
+
+        // try {
+        //     const value = await AsyncStorage.getItem(this.state.username)
+        //     if(value !== null) {
+        //         if (value === this.state.password) {
+        //             await AsyncStorage.setItem('login', 'true')
+        //             this.props.goBack()
+        //         } else {
+        //             Alert.alert('Wrong password')
+        //         }
+        //     } else {
+        //         Alert.alert('User not exist')
+        //     }
+        // } catch(e) {
+        //     console.log(e)
+        // }
     }
 
     changeStatePassword() {

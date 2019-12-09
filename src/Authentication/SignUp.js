@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Dimensions, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
-import AsyncStorage from '@react-native-community/async-storage';
+import * as Config from '../utils/Config'
+// import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class SignIn extends Component {
         this.state = {
             username : '',
             email : '',
+            address : '',
             password : '',
             confirmPassword : '',
             visiable : true,
@@ -19,14 +21,45 @@ export default class SignIn extends Component {
         }
     }
 
-    async createNewAccount() {
-        if (this.state.password === this.state.confirmPassword) {
-            await AsyncStorage.setItem(this.state.username, this.state.password);
-            Alert.alert('Register successfully')
-            this.props.changeTab()
-        } else {
+    createNewAccount() {
+        if (!(this.state.password === this.state.confirmPassword)) {
             Alert.alert('Password and password confirm not match')
+            return;
         }
+
+        fetch(`${Config.END_POINT}/api-server-store/create-user`, {
+            method : 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify({
+                username : this.state.username,
+                password : this.state.password,
+                email : this.state.email,
+                address : this.state.address
+            })
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+            if (responseJson.status_code === 200) {
+                this.setState({
+                    username : '',
+                    email : '',
+                    address : '',
+                    password : '',
+                    confirmPassword : '',
+                })
+                Alert.alert('Register successfully')
+                this.props.changeTab()
+            }
+        })
+        .catch(err => {
+            Alert.alert(err)
+        })
+
+
+        
     }
 
     changeStatePassword() {
@@ -60,14 +93,14 @@ export default class SignIn extends Component {
     render() {
         return (
             <ScrollView>
-                <LinearGradient style={{height : Dimensions.get('screen').height * 0.85}} colors={['#4ddadc', '#225a8e']}>
+                <LinearGradient style={{height : Dimensions.get('screen').height * 0.85, paddingTop: 100}} colors={['#4ddadc', '#225a8e']}>
                     <TextInput 
                         onChangeText={(username) => {this.setState({username})}}
                         style={styles.input}
                         placeholder={'User name'}
                         placeholderTextColor={'white'}
                     />
-                    <Icon name="user" type="AntDesign" style={[styles.symbol, {left : '5%', top : "2.5%"}]}/>
+                    <Icon name="user" type="AntDesign" style={[styles.symbol, {left : '5%', top : "22.5%"}]}/>
                     
                     <TextInput 
                         onChangeText={(email) => {this.setState({email})}}
@@ -75,7 +108,7 @@ export default class SignIn extends Component {
                         placeholder={'Email'}
                         placeholderTextColor={'white'}
                     />
-                    <Icon name="email" type="MaterialCommunityIcons" style={[styles.symbol, {left : '5%', top : "16.5%"}]}/>
+                    <Icon name="email" type="MaterialCommunityIcons" style={[styles.symbol, {left : '5%', top : "36.5%"}]}/>
                     
                     <TextInput 
                         onChangeText={(password) => {this.setState({password})}}
@@ -84,8 +117,8 @@ export default class SignIn extends Component {
                         placeholderTextColor={'white'}
                         secureTextEntry={this.state.visiable}
                     />
-                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '28.5%'}]}/>
-                    <Icon name={this.state.iconPassword} type="Entypo" style={[{right : '5%', top : '28.5%'}, styles.symbol]} onPress={this.changeStatePassword.bind(this)}/>
+                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '49.5%'}]}/>
+                    <Icon name={this.state.iconPassword} type="Entypo" style={[{right : '5%', top : '49.5%'}, styles.symbol]} onPress={this.changeStatePassword.bind(this)}/>
                     
                     <TextInput 
                         onChangeText={(confirmPassword) => {this.setState({confirmPassword})}}
@@ -94,9 +127,17 @@ export default class SignIn extends Component {
                         placeholderTextColor={'white'}
                         secureTextEntry={this.state.visiableConfirmPassword}
                     />
-                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '40.5%'}]}/>
-                    <Icon name={this.state.iconConfirmPassword} type="Entypo" style={[{right : '5%', top : '40.5%'}, styles.symbol]} onPress={this.changeStateConfirmPassword.bind(this)}/>
+                    <Icon name="lock" type="Feather" style={[styles.symbol, {left : '5%', top : '62.5%'}]}/>
+                    <Icon name={this.state.iconConfirmPassword} type="Entypo" style={[{right : '5%', top : '62.5%'}, styles.symbol]} onPress={this.changeStateConfirmPassword.bind(this)}/>
                     
+                    <TextInput 
+                        onChangeText={(address) => {this.setState({address})}}
+                        style={styles.input}
+                        placeholder={'Address (Optional)'}
+                        placeholderTextColor={'white'}
+                    />
+                    <Icon name="location-on" type="MaterialIcons" style={[styles.symbol, {left : '5%', top : "75.5%"}]}/>
+
                     <TouchableOpacity style={styles.btn} onPress={this.createNewAccount.bind(this)}>
                         <Text style={styles.txt}>Sign Up</Text>
                     </TouchableOpacity>

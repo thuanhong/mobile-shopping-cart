@@ -3,7 +3,7 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {View, Image, Button, Dimensions, SafeAreaView} from 'react-native';
+import {View, Image, Button, Dimensions, SafeAreaView, Text} from 'react-native';
 import Home from './MainPage/Home'
 import SettingPage from './Setting/SettingPage'
 import AuthenticatePage from './Authentication/AuthenticatePage';
@@ -90,7 +90,21 @@ const MainPageBottomTabsNavigation = createBottomTabNavigator(
             screen: Cart,
             navigationOptions : {
                 tabBarIcon: (
-                    <Icon name='shoppingcart' type="AntDesign"/>
+                    <View>
+                        <Icon name='shoppingcart' type="AntDesign"/>
+                        <View style={{position:'absolute',
+                              top:0,
+                              right:0,
+                              minWidth:15,
+                              height:15,
+                              borderRadius:15,
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              backgroundColor: '#FF0000',
+                              zIndex : 0}}>
+                            <Text style={{color:'white', fontSize: 10}}>5</Text>
+                        </View>
+                    </View>
                 )
             }
         },
@@ -181,7 +195,7 @@ const mainSwitchNavigation = createSwitchNavigator(
         Authen :  AuthenticatePage
     },
     {
-        initialRouteName : 'Authen',
+        initialRouteName : 'Drawer',
         defaultNavigationOptions : {
             headerShown : false
         }

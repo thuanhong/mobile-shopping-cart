@@ -31,6 +31,10 @@ export default class ProductDetail extends Component {
 const styles = StyleSheet.create({
     container : {
         flex : 1,
+        margin : 10,
+        padding : 10,
+        elevation : 10,
+        backgroundColor : 'white'
     },
     flexImg : {
         flex : 1,

@@ -7,21 +7,21 @@ export default class Contact extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{flex: 1}}>
+                <View style={{flex : 1}}>
                     <Image source={require('../../static/react-native.png')} style={styles.img} />
                 </View>
                 <View style={styles.contact}>
                     <View style={styles.field}>
                         <Icon name="user" type="AntDesign"/>
-                        <Text>Hong Thanh Thuan</Text>
+                        <Text style={styles.textContent}>Hong Thanh Thuan</Text>
                     </View>
                     <View style={styles.field}>
                         <Icon name="location-on" type="MaterialIcons"/>
-                        <Text>Ho Chi Minh City</Text>
+                        <Text style={styles.textContent}>Ho Chi Minh City</Text>
                     </View>
                     <View style={styles.field}>
                         <Icon name="email" type="MaterialCommunityIcons"/>
-                        <Text>thuanhong357@gmail.com</Text>
+                        <Text style={styles.textContent}>thuanhong357@gmail.com</Text>
                     </View>
                 </View>
             </View>
@@ -31,7 +31,6 @@ export default class Contact extends Component {
 
 const styles = StyleSheet.create({
     container : {
-        backgroundColor: '#d4d7d9',
         flex : 1,
         alignContent: 'stretch'
     },
@@ -39,12 +38,19 @@ const styles = StyleSheet.create({
         width: Dimensions.get('screen').width,
         height: Dimensions.get('screen').height * 0.3,
     },
-    contact: {
-        flex: 1
+    contact : {
+        flex : 1
     },
     field: {
         flex : 1,
         flexDirection: 'row',
-        
+        borderBottomColor: 'black',
+        alignItems: 'flex-end',
+        backgroundColor : 'white',
+        elevation :5,
+        justifyContent : 'space-around'
+    },
+    textContent: {
+        // padding : 5
     }
 })

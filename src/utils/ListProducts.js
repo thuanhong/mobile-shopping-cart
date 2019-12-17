@@ -36,6 +36,15 @@ export default class ListProducts extends Component {
                                     <Text style={{fontWeight : 'bold', fontSize : 20, flex : 1}}>PRODUCT NAME</Text>
                                     <Text style={{flex : 1, fontSize : 17}}>Cost : {costRandom} $</Text>
                                     <Text style={{flex : 1, fontSize : 17}}>Color : {color}</Text>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                                        <TouchableOpacity style={{paddingHorizontal: 7, borderColor: 'black', borderWidth: 1, borderRadius: 5}}>
+                                            <Text>-</Text>
+                                        </TouchableOpacity>
+                                        <Text>0</Text>
+                                        <TouchableOpacity style={{paddingHorizontal: 7, borderColor: 'black', borderWidth: 1, borderRadius: 5}}>
+                                            <Text>+</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                         </TouchableOpacity>

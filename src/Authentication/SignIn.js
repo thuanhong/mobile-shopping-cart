@@ -3,7 +3,6 @@ import { Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-nati
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
 import * as Config from '../utils/Config'
-// import AsyncStorage from '@react-native-community/async-storage';
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -25,7 +24,7 @@ export default class SignIn extends Component {
         fetch(`${Config.END_POINT}/api-server-store/authenticate`, {
             method: 'POST',
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
@@ -40,22 +39,6 @@ export default class SignIn extends Component {
                 this.props.navigate('Drawer')
             }
         })
-
-        // try {
-        //     const value = await AsyncStorage.getItem(this.state.username)
-        //     if(value !== null) {
-        //         if (value === this.state.password) {
-        //             await AsyncStorage.setItem('login', 'true')
-        //             this.props.goBack()
-        //         } else {
-        //             Alert.alert('Wrong password')
-        //         }
-        //     } else {
-        //         Alert.alert('User not exist')
-        //     }
-        // } catch(e) {
-        //     console.log(e)
-        // }
     }
 
     changeStatePassword() {

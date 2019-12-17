@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import * as Config from '../utils/Config';
 
 export default class SettingPage extends React.Component {
     constructor(props) {
@@ -9,6 +10,17 @@ export default class SettingPage extends React.Component {
             telephone: '',
             address: ''
         }
+    }
+
+    componentDidMount() {
+        fetch(`${Config.END_POINT}/user-info/`, {
+            method: 'GET',
+        })
+        .then((response) => response.json())
+        .then(responseJson => {
+            
+        })
+        .catch()
     }
 
     updateUserInformation() {

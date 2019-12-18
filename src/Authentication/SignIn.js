@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
-import * as Config from '../utils/Config'
+
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -20,25 +20,8 @@ export default class SignIn extends Component {
             Alert.alert('Please Input')
             return
         }
-
-        fetch(`${Config.END_POINT}/api-server-store/authenticate`, {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username : this.state.username,
-                password : this.state.password
-            })
-        })
-        .then(response => response.json())
-        .then(responseJson => {
-            if (responseJson.status_code == 200) {
-                Alert.alert('Login successful')
-                this.props.navigate('Drawer')
-            }
-        })
+        Alert.alert('Login successful')
+        this.props.navigate('Drawer')
     }
 
     changeStatePassword() {

@@ -1,1 +1,0 @@
-exports.END_POINT = 'http://172.22.2.53:3000'

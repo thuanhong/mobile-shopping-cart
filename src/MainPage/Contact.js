@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
-import {Icon, } from  'native-base';
+import { Text, View, StyleSheet, Image } from 'react-native'
+import { Icon } from  'native-base';
 
 
 export default class Contact extends Component {
@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
         alignContent: 'stretch'
     },
     img: {
-        // width: Dimensions.get('screen').width * 0.9,
-        // height: Dimensions.get('screen').height * 0.4,
         width : '100%',
         height: '100%'
     },

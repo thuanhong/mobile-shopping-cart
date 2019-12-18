@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Dimensions, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import {Icon} from 'native-base'
-import * as Config from '../utils/Config'
-// import AsyncStorage from '@react-native-community/async-storage';
+
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -26,40 +25,15 @@ export default class SignIn extends Component {
             Alert.alert('Password and password confirm not match')
             return;
         }
-
-        fetch(`${Config.END_POINT}/api-server-store/create-user`, {
-            method : 'POST',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body : JSON.stringify({
-                username : this.state.username,
-                password : this.state.password,
-                email : this.state.email,
-                address : this.state.address
-            })
+        this.setState({
+            username : '',
+            email : '',
+            address : '',
+            password : '',
+            confirmPassword : '',
         })
-        .then(response => response.json())
-        .then(responseJson => {
-            if (responseJson.status_code === 200) {
-                this.setState({
-                    username : '',
-                    email : '',
-                    address : '',
-                    password : '',
-                    confirmPassword : '',
-                })
-                Alert.alert('Register successfully')
-                this.props.changeTab()
-            }
-        })
-        .catch(err => {
-            Alert.alert(err)
-        })
-
-
-        
+        Alert.alert('Register successfully')
+        this.props.changeTab()
     }
 
     changeStatePassword() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import * as Config from '../utils/Config';
+
 
 export default class SettingPage extends React.Component {
     constructor(props) {
@@ -10,21 +10,6 @@ export default class SettingPage extends React.Component {
             telephone: '',
             address: ''
         }
-    }
-
-    componentDidMount() {
-        fetch(`${Config.END_POINT}/user-info/`, {
-            method: 'GET',
-        })
-        .then((response) => response.json())
-        .then(responseJson => {
-            
-        })
-        .catch()
-    }
-
-    updateUserInformation() {
-
     }
 
     render() {
@@ -48,7 +33,7 @@ export default class SettingPage extends React.Component {
                     placeholder={'Telephone'}
                     defaultValue={'Telephone'}
                 />
-                <TouchableOpacity style={styles.btn} onPress={this.updateUserInformation.bind(this)}>
+                <TouchableOpacity style={styles.btn}>
                     <Text style={{color : 'white', textAlign: 'center', fontWeight: 'bold'}}>UPDATE INFORMATION</Text>
                 </TouchableOpacity>
             </View>

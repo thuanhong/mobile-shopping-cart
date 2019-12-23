@@ -45,8 +45,8 @@ export default class Home extends React.Component {
     render() {
         return(
             <ScrollView style={styles.container}>
-                <Card navigatePage={this.props.navigation.navigate.bind(this)} title={"CLOTHES"}/>
-                <Card navigatePage={this.props.navigation.navigate.bind(this)} title={"ELECTRIC DEVICES"}/>
+                <Card navigatePage={this.props.navigation.navigate.bind(this)} title={"SPRING COLLECTION"}/>
+                <Card navigatePage={this.props.navigation.navigate.bind(this)} title={"NEW RPODUCTS"}/>
                 <View>
                     <Grid navigate={this.props.navigation.navigate.bind(this)}/>
                 </View>

@@ -12,15 +12,15 @@ export default class Contact extends Component {
                 </View>
                 <View style={styles.contact}>
                     <View style={styles.field}>
-                        <Icon style={{fontSize : 25}} name="user" type="AntDesign"/>
+                        <Icon style={styles.iconStyle} name="user" type="AntDesign"/>
                         <Text style={styles.textContent}>Hong Thanh Thuan</Text>
                     </View>
                     <View style={styles.field}>
-                        <Icon style={{fontSize : 25}} name="location-on" type="MaterialIcons"/>
+                        <Icon style={styles.iconStyle} name="location-on" type="MaterialIcons"/>
                         <Text style={styles.textContent}>Ho Chi Minh City</Text>
                     </View>
                     <View style={[styles.field, {borderBottomWidth: 0}]}>
-                        <Icon style={{fontSize : 25}} name="email" type="MaterialCommunityIcons"/>
+                        <Icon style={styles.iconStyle} name="email" type="MaterialCommunityIcons"/>
                         <Text style={styles.textContent}>thuanhong357@gmail.com</Text>
                     </View>
                 </View>
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     },
     img: {
         width : '100%',
-        height: '100%'
+        height: '100%',
+        resizeMode: "stretch"
     },
     contact : {
         flex : 1,
@@ -52,8 +53,13 @@ const styles = StyleSheet.create({
         borderBottomWidth : 1,
         justifyContent : 'space-between'
     },
+    iconStyle: {
+        fontSize : 25,
+        paddingLeft: 15
+    },
     textContent: {
         padding : 5,
         fontSize: 20,
+        paddingRight: 15
     }
 })

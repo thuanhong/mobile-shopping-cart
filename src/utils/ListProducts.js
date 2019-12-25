@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { Header, Left, Body, Icon, Title } from 'native-base';
+import Images from '../utils/StaticResource';
 
 export default class ListProducts extends Component {
+
+
     constructor(props) {
         super(props)
         this.state = {
-            arrayColor : ['black', 'red', 'yellow', 'blue', 'grey', 'violet', 'green', 'brown', 'white', 'pink']
         }
     }
 
@@ -22,7 +24,6 @@ export default class ListProducts extends Component {
                     </Body>
                 </Header>
                 {this.state.arrayColor.map((color, index) => {
-                    const costRandom = (Math.random() * 100).toFixed(2)
                     return (
                         <TouchableOpacity key={index} onPress={() => this.props.navigation.navigate('Detail', {
                             cost : costRandom,

@@ -1,13 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native';
 import Card from '../utils/Card'
+import Images from '../utils/StaticResource';
 
 
 class Grid extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            arrayColor : ['black', 'red', 'yellow', 'blue', 'grey', 'violet']
+            arrayColor : require('../../data/clothes.json').slice(20, 26)
         }
     }
 
@@ -17,16 +18,15 @@ class Grid extends React.Component {
                 <Text style={{fontSize: 25, color: 'grey',alignSelf: 'flex-start', margin : 10}}>TOP PRODUCT</Text>
                 <View style={styles.gridview}>
                     {
-                        this.state.arrayColor.map((color, index) => {
-                            const costRandom = (Math.random() * 100).toFixed(2)
+                        this.state.arrayColor.map((product, index) => {
                             return (
-                                <TouchableOpacity key={color} style={styles.grid} onPress={() => this.props.navigate('Detail', {
-                                    cost : costRandom,
-                                    color : color
+                                <TouchableOpacity key={index} style={styles.grid} onPress={() => this.props.navigate('Detail', {
+                                    cost : product['price'],
+                                    color : product['color']
                                 })}>
-                                    <Image source={{uri : 'https://place-hold.it/150x200'}} style={styles.image}/>
-                                    <Text style={styles.cost}>Cost : {costRandom}$</Text>
-                                    <Text>Color : {color}</Text>
+                                    <Image source={Images[product.images[0]]} style={styles.image}/>
+                                    <Text style={styles.cost}>Price : {product['price']}$</Text>
+                                    <Text>Color : {product['color']}</Text>
                                 </TouchableOpacity>
                             )
                         })
@@ -68,6 +68,9 @@ const styles = StyleSheet.create({
         elevation : 5,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    grid: {
+        marginTop: 15
     },
     gridview : {
         flexDirection : 'row',

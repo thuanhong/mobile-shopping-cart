@@ -102,7 +102,7 @@ const MainPageBottomTabsNavigation = createBottomTabNavigator(
                               justifyContent: 'center',
                               backgroundColor: '#FF0000',
                               zIndex : 0}}>
-                            <Text style={{color:'white', fontSize: 10}}>5</Text>
+                            <Text style={{color:'white', fontSize: 10}}>0</Text>
                         </View>
                     </View>
                 )

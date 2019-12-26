@@ -1,26 +1,31 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
+import Images from '../utils/StaticResource'
 
 export default class ProductDetail extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            product : this.props.navigation.getParam('product', null)
+        }
+    }
+
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.flexImg}>
-                    <Image source={{uri : 'https://place-hold.it/150x150'}} style={styles.image}/>
-                    <Image source={{uri : 'https://place-hold.it/150x150'}} style={styles.image}/>
+                    <Image source={Images[this.state.product.images[0]]} style={styles.image}/>
+                    <Image source={Images[this.state.product.images[1]]} style={styles.image}/>
                 </View>
                 <View style={{flex : 1}}>
                     <View style={styles.flexDetail}>
-                        <Text style={{color : 'red', fontSize : 20, textAlign : 'center'}}>PRODUCT NAME</Text>
-                        <Text style={{fontSize: 17, textAlign : 'center'}}>Cost : {this.props.navigation.getParam('cost', 'updating')}$</Text>
-                        <Text style={{fontSize: 17, textAlign : 'center'}}>Color : {this.props.navigation.getParam('color', 'updating')}</Text>
+                        <Text style={{color : 'red', fontSize : 20, textAlign : 'center'}}>{this.state.product.name}</Text>
+                        <Text style={{fontSize: 17, textAlign : 'center'}}>Cost : {this.state.product.price}$</Text>
+                        <Text style={{fontSize: 17, textAlign : 'center'}}>Color : {this.state.product.color}</Text>
                     </View>
                     <View style={styles.flexContent}>
-                        <Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu mollis ex.Vestibulum gravida euismod viverra.
-                            Sed mi leo, ullamcorper ac tellus sit amet, congue feugiat sem. Nulla turpis enim, imperdiet sed metus ullamcorper,
-                            ultricies porttitor elit. Nam lacus nulla, mattis id pharetra vitae, bibendum vitae quam.
-                        </Text>
+                        <Text>{this.state.product.description}</Text>
                     </View>
                 </View>
             </View>

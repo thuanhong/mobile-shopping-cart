@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
+import { Text, View, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
 import { Header, Left, Body, Icon, Title } from 'native-base';
 import Images from '../utils/StaticResource';
 
@@ -47,7 +47,7 @@ export default class ListProducts extends Component {
                 </Header>
                 <FlatList
                     data={require('../../data/clothes.json').filter(product => product[this.state.filter])}
-                    renderItem={({item}) => <Item key={item.id} product={item} navigate={this.props.navigation.navigate}/>}
+                    renderItem={({item}) => <Item product={item} navigate={this.props.navigation.navigate}/>}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>

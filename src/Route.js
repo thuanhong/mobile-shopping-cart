@@ -3,7 +3,7 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {View, Image, Button, Dimensions, SafeAreaView, Text} from 'react-native';
+import {View, Image, Button, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
 import Home from './MainPage/Home'
 import SettingPage from './Setting/SettingPage'
 import AuthenticatePage from './Authentication/AuthenticatePage';
@@ -53,19 +53,19 @@ const SettingPageStackNavigation = createStackNavigator(
 
 const homePageStackNavigation = createStackNavigator(
     {
-        Home : {
-            screen : Home,
-            navigationOptions : {
-                headerShown : false
-            }
-        },
+        Home : Home,
         List : ListProducts,
         Detail : {
             screen : ProductDetail,
-            navigationOptions : {
+            navigationOptions : ({navigation}) => ({
                 headerShown : true,
-                title : 'Detail'
-            }
+                title : 'Detail',
+                headerRight: (
+                    <TouchableOpacity style={{marginRight: 20}} onPress={() => navigation.state.params.addToCart()}>
+                        <Icon name='shoppingcart' type="AntDesign"/>
+                    </TouchableOpacity>
+                )
+            })
         }
     },
     {
@@ -88,25 +88,6 @@ const MainPageBottomTabsNavigation = createBottomTabNavigator(
         },
         Cart : {
             screen: Cart,
-            navigationOptions : {
-                tabBarIcon: (
-                    <View>
-                        <Icon name='shoppingcart' type="AntDesign"/>
-                        <View style={{position:'absolute',
-                              top:0,
-                              right:0,
-                              minWidth:15,
-                              height:15,
-                              borderRadius:15,
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              backgroundColor: '#FF0000',
-                              zIndex : 0}}>
-                            <Text style={{color:'white', fontSize: 10}}>0</Text>
-                        </View>
-                    </View>
-                )
-            }
         },
         History : {
             screen: History,

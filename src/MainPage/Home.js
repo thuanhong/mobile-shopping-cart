@@ -21,8 +21,7 @@ class Grid extends React.Component {
                         this.state.arrayColor.map((product, index) => {
                             return (
                                 <TouchableOpacity key={index} style={styles.grid} onPress={() => this.props.navigate('Detail', {
-                                    cost : product['price'],
-                                    color : product['color']
+                                    product: product
                                 })}>
                                     <Image source={Images[product.images[0]]} style={styles.image}/>
                                     <Text style={styles.cost}>Price : {product['price']}$</Text>
@@ -38,10 +37,6 @@ class Grid extends React.Component {
 }
 
 export default class Home extends React.Component {
-    changeScreen() {
-        console.log('navigate')
-    }
-
     render() {
         return(
             <ScrollView style={styles.container}>

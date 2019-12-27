@@ -16,7 +16,6 @@ export default class Card extends Component {
       let imageArray = []
       let barArray = []
       this.arr_images.forEach((image, i) => {
-        console.log(image.images[0])
         const thisImage = (
           <TouchableOpacity key={i} onPress={() => this.props.navigatePage('List', {
             title: this.props.title

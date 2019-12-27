@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
 import Images from '../utils/StaticResource'
+import {connect} from 'react-redux'
 
-export default class ProductDetail extends Component {
+class ProductDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
             product : this.props.navigation.getParam('product', null)
+        }
+    }
+
+    componentDidMount() {
+        this.props.navigation.setParams({
+            addToCart: this.addToCart.bind(this)
+        })
+    }
+
+    addToCart() {
+        if (this.props.listCart[this.state.product.idProduct] === undefined) {
+            this.props.dispatch({
+                type: 'ADD_TO_CART',
+                item: this.state.product
+            })
         }
     }
 
@@ -55,3 +71,5 @@ const styles = StyleSheet.create({
         height : 200
     }
 })
+
+export default connect(state => ({listCart: state.listCart}))(ProductDetail);

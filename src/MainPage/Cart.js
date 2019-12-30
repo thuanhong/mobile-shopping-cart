@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Icon} from 'native-base'
 import Images from '../utils/StaticResource';
 import { NavigationEvents } from 'react-navigation';
+import {removeByKey} from '../utils/SubFunction'
 
 
 class Count extends React.Component {
@@ -34,16 +35,6 @@ class Item extends React.Component {
             })
         }
     }
-
-    // deleteProduct(id, amount, price) {
-    //     this.props.dispatch({
-    //         type: 'DELETE',
-    //         id: id,
-    //         price: amount * price,
-    //         amount : amount
-    //     })
-    // }
-
 
     render() {
         return(
@@ -109,17 +100,13 @@ class Cart extends React.Component {
     }
 
     deleteProduct(id, amount, price) {
-        console.log('1111111111111111111111111111111111111111')
-        console.log(Object.values(this.props.listCart).length)
         this.props.dispatch({
             type: 'DELETE',
             id: id,
             price: amount * price,
             amount : amount
         })
-        console.log(Object.values(this.props.listCart).length)
-        console.log('1111111111111111111111111111111111111111')
-        this.setState({listCart : Object.values(this.props.listCart)})
+        this.setState({listCart : Object.values(removeByKey(this.props.listCart, id))})
     }
 
 

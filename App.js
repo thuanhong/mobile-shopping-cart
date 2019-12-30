@@ -2,6 +2,7 @@ import React from 'react';
 import AppContainer from './src/Route'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
+import {removeByKey} from './src/utils/SubFunction'
 
 export default class App extends React.Component {
   render() {
@@ -17,16 +18,6 @@ const defaultState = {
   listCart:{},
   totalMoney: 0,
   totalProduct: 0
-};
-
-
-const removeByKey = (object, deleteKey) => {
-  return Object.keys(object)
-    .filter(key => key != deleteKey)
-    .reduce((result, current) => {
-      result[current] = object[current];
-      return result;
-    }, {});
 };
 
 

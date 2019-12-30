@@ -22,7 +22,7 @@ const defaultState = {
 
 const removeByKey = (object, deleteKey) => {
   return Object.keys(object)
-    .filter(key => key !== deleteKey)
+    .filter(key => key != deleteKey)
     .reduce((result, current) => {
       result[current] = object[current];
       return result;

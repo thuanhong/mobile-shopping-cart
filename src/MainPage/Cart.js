@@ -3,7 +3,8 @@ import { Text, View, FlatList, Button, TouchableOpacity, StyleSheet, Image } fro
 import {connect} from 'react-redux'
 import {Icon} from 'native-base'
 import Images from '../utils/StaticResource';
-import { throwStatement } from '@babel/types';
+import { NavigationEvents } from 'react-navigation';
+
 
 class Count extends React.Component {
     render() {
@@ -34,14 +35,14 @@ class Item extends React.Component {
         }
     }
 
-    deleteProduct() {
-        this.props.dispatch({
-            type: 'DELETE',
-            id: this.props.product.idProduct,
-            price: this.state.amount * this.props.product.price,
-            amount : this.state.amount
-        })
-    }
+    // deleteProduct(id, amount, price) {
+    //     this.props.dispatch({
+    //         type: 'DELETE',
+    //         id: id,
+    //         price: amount * price,
+    //         amount : amount
+    //     })
+    // }
 
 
     render() {
@@ -56,7 +57,7 @@ class Item extends React.Component {
                     <View style={{flex : 2, paddingLeft : 40}}>
                         <View style={{fontWeight : 'bold', fontSize : 20, flex : 1, flexDirection: 'row'}}>
                             <Text style={{fontWeight : 'bold', fontSize : 20, flex : 1}}>{this.props.product.name}</Text>
-                            <TouchableOpacity onPress={this.deleteProduct.bind(this)}>
+                            <TouchableOpacity onPress={() => this.props.deleteItemById(this.props.product.idProduct, this.state.amount, this.props.product.price)}>
                                 <Icon  style={{color: 'red'}} name="delete" type="AntDesign"/>
                             </TouchableOpacity>
                         </View>
@@ -100,18 +101,42 @@ class Cart extends React.Component {
         )
     }
 
+    constructor(props) {
+        super(props)
+        this.state ={ 
+            listCart : Object.values(this.props.listCart)
+        }
+    }
+
+    deleteProduct(id, amount, price) {
+        console.log('1111111111111111111111111111111111111111')
+        console.log(Object.values(this.props.listCart).length)
+        this.props.dispatch({
+            type: 'DELETE',
+            id: id,
+            price: amount * price,
+            amount : amount
+        })
+        console.log(Object.values(this.props.listCart).length)
+        console.log('1111111111111111111111111111111111111111')
+        this.setState({listCart : Object.values(this.props.listCart)})
+    }
+
 
     render() {
         return (
             <View style={{flex: 1}}>
+                <NavigationEvents
+                    onWillFocus={() => this.setState({listCart : Object.values(this.props.listCart)})}
+                />
                 <FlatList
-                    data={Object.values(this.props.listCart)}
-                    renderItem={(item, index) => (
-                        <Item product={item.item} dispatch={this.props.dispatch} navigate={this.props.navigation.navigate}/>
+                    data={this.state.listCart}
+                    renderItem={({item}) => (
+                        <Item product={item} dispatch={this.props.dispatch} navigate={this.props.navigation.navigate} deleteItemById={(id, amount, price) => this.deleteProduct(id, amount, price)}/>
                     )}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(item, index) => item.id}
                     style={{marginBottom: "15%"}}
-                    extraData={Object.values(this.props.listCart)}
+                    extraData={this.state}
                     ListEmptyComponent={<Text>Empty</Text>}
                 />
                 <View style={{position: 'absolute', bottom:10, left:'2%', width: '96%'}}>

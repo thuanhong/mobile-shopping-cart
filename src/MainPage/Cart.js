@@ -3,7 +3,7 @@ import { Text, View, FlatList, Button, TouchableOpacity, StyleSheet, Image } fro
 import {connect} from 'react-redux'
 import {Icon} from 'native-base'
 import Images from '../utils/StaticResource';
-import { NavigationEvents } from 'react-navigation';
+import { NavigationEvents } from 'react-navigation'
 import {removeByKey} from '../utils/SubFunction'
 
 
@@ -119,12 +119,12 @@ class Cart extends React.Component {
                 <FlatList
                     data={this.state.listCart}
                     renderItem={({item}) => (
-                        <Item product={item} dispatch={this.props.dispatch} navigate={this.props.navigation.navigate} deleteItemById={(id, amount, price) => this.deleteProduct(id, amount, price)}/>
+                        <Item key={item.idProduct} product={item} dispatch={this.props.dispatch} navigate={this.props.navigation.navigate} deleteItemById={(id, amount, price) => this.deleteProduct(id, amount, price)}/>
                     )}
-                    keyExtractor={(item, index) => item.id}
+                    keyExtractor={(item, index) => item.idProduct.toString()}
                     style={{marginBottom: "15%"}}
                     extraData={this.state}
-                    ListEmptyComponent={<Text>Empty</Text>}
+                    ListEmptyComponent={<Text style={{textAlign: "center", marginTop: '50%', fontSize: 20, color: '#a696b3'}}>Empty</Text>}
                 />
                 <View style={{position: 'absolute', bottom:10, left:'2%', width: '96%'}}>
                     <Button

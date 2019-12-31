@@ -9,6 +9,7 @@ export default class History extends Component {
         }
     }
 
+
     render() {
         return (
             <ScrollView>
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
     },
     row: {
         justifyContent : 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        margin: 1
     },
     field: {
         fontSize: 17,

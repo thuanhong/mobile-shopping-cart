@@ -49,6 +49,7 @@ export default class ListProducts extends Component {
                     data={require('../../data/clothes.json').filter(product => product[this.state.filter])}
                     renderItem={({item}) => <Item product={item} navigate={this.props.navigation.navigate}/>}
                     keyExtractor={(item, index) => index.toString()}
+                    style={{marginBottom: '10%'}}
                 />
             </View>
         )

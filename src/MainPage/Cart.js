@@ -109,6 +109,16 @@ class Cart extends React.Component {
         this.setState({listCart : Object.values(removeByKey(this.props.listCart, id))})
     }
 
+    checkOut() {
+        const dateNow = new Date()
+        this.props.dispatch({
+            type: 'CHECKOUT',
+            date: `${dateNow.getDate()}/${dateNow.getMonth()}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes()}`,
+            total: this.props.totalMoney
+        })
+        this.setState({listCart : []})
+    }
+
 
     render() {
         return (
@@ -129,7 +139,7 @@ class Cart extends React.Component {
                 <View style={{position: 'absolute', bottom:10, left:'2%', width: '96%'}}>
                     <Button
                         title={`Check out ${this.props.totalMoney}$`}
-                        onPress={() => console.log(1)}
+                        onPress={this.checkOut.bind(this)}
                     />
                 </View>
             </View>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 
-export default class History extends Component {
+class History extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listOrder : require('../../data/history.json')
+            listOrder : []
         }
     }
 
@@ -14,7 +15,7 @@ export default class History extends Component {
         return (
             <ScrollView>
                 {
-                    this.state.listOrder.map((order, index) => (
+                    this.props.history.map((order, index) => (
                         <View key={index} style={styles.box}>
                             <View style={styles.row}>
                                 <Text style={[styles.field, {color: 'grey'}]}>Order id:</Text>
@@ -56,5 +57,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold'
     },
-
 })
+
+export default connect(state => ({history: state.history}))(History);

@@ -10,3 +10,14 @@ Build an app shopping cart that allows users to log in, choose products and chec
 
 ## Sceenshot
 
+### All screen
+![Screenshot](data/optimized.gif)
+
+### Login screen
+![Screenshot](data/optimized1.gif)
+
+### Select products
+![Screenshot](data/optimized2.gif)
+
+### Checkout
+![Screenshot](data/optimized4.gif)
